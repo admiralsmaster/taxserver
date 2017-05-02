@@ -1,2 +1,5 @@
-# taxserver
-simple example server for taxcalculator
+# Taxserver [![Build Status](https://travis-ci.org/admiralsmaster/taxserver.svg?branch=master)](https://travis-ci.org/admiralsmaster/taxserver) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/23340eaa1afc448a93106033271e17ac)](https://www.codacy.com/app/github-ariel/taxserver?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=admiralsmaster/taxserver&amp;utm_campaign=Badge_Grade)
+
+Simple example server for taxcalculator.
+
+Example-URL: http://localhost:8080/interface/2017/0?LZZ=1&RE4=2500000&STKL=1
