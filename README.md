@@ -1,4 +1,4 @@
-# Taxserver [![Build Status](https://travis-ci.org/admiralsmaster/taxserver.svg?branch=master)](https://travis-ci.org/admiralsmaster/taxserver) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/23340eaa1afc448a93106033271e17ac)](https://www.codacy.com/app/github-ariel/taxserver?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=admiralsmaster/taxserver&amp;utm_campaign=Badge_Grade)
+# Taxserver [![Build Status](https://travis-ci.org/admiralsmaster/taxserver.svg?branch=master)](https://travis-ci.org/admiralsmaster/taxserver) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/23340eaa1afc448a93106033271e17ac)](https://www.codacy.com/app/github-ariel/taxserver)
 
 Simple example server for taxcalculator.
 
