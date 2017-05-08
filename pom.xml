@@ -34,11 +34,6 @@
 			<artifactId>spring-boot-starter-webflux</artifactId>
 		</dependency>
 		<dependency>
-		    <groupId>org.springframework</groupId>
-		    <artifactId>spring-web-reactive</artifactId>
-		    <version>${spring.version}</version>
-		</dependency>
-		<dependency>
 			<groupId>io.projectreactor</groupId>
 			<artifactId>reactor-core</artifactId>
 		</dependency>
@@ -49,9 +44,9 @@
 			<version>2017.0.0</version>
 		</dependency>
 		<dependency>
-		    <groupId>info.kuechler.bmf.taxcalculator</groupId>
-		    <artifactId>taxcalculator</artifactId>
-		    <version>2017.0.0</version>
+			<groupId>info.kuechler.bmf.taxcalculator</groupId>
+			<artifactId>taxcalculator</artifactId>
+			<version>2017.0.0</version>
 		</dependency>
 		
 		<dependency>
