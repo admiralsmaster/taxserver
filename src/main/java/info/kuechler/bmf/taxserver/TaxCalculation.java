@@ -35,6 +35,7 @@ public class TaxCalculation {
         this.taxCalculatorFactory = new TaxCalculatorFactory();
     }
 
+    // Hint: yes, this is a playground
     public Mono<Lohnsteuer> calculate(final Flux<Entry<String, String>> inputParameters, final int yearParameter,
             final int monthParameter) {
 
