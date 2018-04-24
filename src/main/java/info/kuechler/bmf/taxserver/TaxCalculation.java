@@ -103,7 +103,7 @@ public class TaxCalculation {
             final Ausgabe output = getObjectFactory().createAusgabe();
             output.setName(outputName);
             output.setType(Type.STANDARD);
-            output.setValue((BigDecimal) reader.get(outputName));
+            output.setValue(reader.getBigDecimal(outputName));
             return output;
         } catch (ReadWriteException e) {
             throw new IllegalArgumentException("Error during read");
