@@ -1,0 +1,5 @@
+{"properties": [{
+  "name": "taxserver.information",
+  "type": "java.lang.String",
+  "description": "output for information tag in XML"
+}]}

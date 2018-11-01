@@ -8,6 +8,7 @@ import java.util.Map.Entry;
 import java.util.function.BiConsumer;
 
 import org.reactivestreams.Publisher;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import info.kuechler.bmf.taxapi.Ausgabe;
@@ -29,13 +30,17 @@ public class TaxCalculation {
 
     private final TaxCalculatorFactory taxCalculatorFactory;
 
+    @Value("${taxserver.information}")
+    private String information;
+
     public TaxCalculation() {
         super();
         this.objectFactory = new ObjectFactory();
         this.taxCalculatorFactory = new TaxCalculatorFactory();
     }
 
-    // Hint: yes, this is a playground
+    // Hint: yes, this is a playground :)
+    // How many Flux can you combine?
     public Mono<Lohnsteuer> calculate(final Flux<Entry<String, String>> inputParameters, final int yearParameter,
             final int monthParameter) {
 
@@ -43,6 +48,7 @@ public class TaxCalculation {
                 .fromSupplier(() -> getTaxCalculatorFactory().getYearKey(monthParameter, yearParameter));
         final Mono<Lohnsteuer> tax = Mono.fromSupplier(() -> getObjectFactory().createLohnsteuer());
         final Mono<Integer> year = Mono.just(yearParameter);
+        final Mono<String> information = Mono.just(getInformation());
 
         // get inputs objects...
         // ...and output names...
@@ -65,9 +71,12 @@ public class TaxCalculation {
 
         // ...fill result object...
 
-        final Mono<Lohnsteuer> tax1 = combineToMono(tax, year, (t, y) -> t.setJahr(Integer.toString(y)));
-        final Mono<Lohnsteuer> tax2 = combineToMono(tax1, inputs, (t, in) -> t.setEingaben(in));
-        return combineToMono(tax2, outputs, (t, out) -> t.setAusgaben(out));
+        // ParallelFlux.from(new Publisher[] {tax, year, information, inputs, outputs}).
+
+        final Mono<Lohnsteuer> tax1 = combineMonos(tax, year, (t, y) -> t.setJahr(Integer.toString(y)));
+        final Mono<Lohnsteuer> tax2 = combineMonos(tax1, inputs, (t, in) -> t.setEingaben(in));
+        final Mono<Lohnsteuer> tax3 = combineMonos(tax2, outputs, (t, out) -> t.setAusgaben(out));
+        return combineMonos(tax3, information, (t, info) -> t.setInformation(info));
     }
 
     protected Object convertToType(final String value, final Class<?> type) {
@@ -164,11 +173,23 @@ public class TaxCalculation {
         }).last();
     }
 
+    public static <T1, T2> Mono<T1> combineMonos(Mono<? extends T1> p1, Mono<? extends T2> p2,
+            BiConsumer<? super T1, ? super T2> combinator) {
+        return Mono.zip(p1, p2, (t, u) -> {
+            combinator.accept(t, u);
+            return t;
+        });
+    };
+
     public ObjectFactory getObjectFactory() {
         return objectFactory;
     }
 
     public TaxCalculatorFactory getTaxCalculatorFactory() {
         return taxCalculatorFactory;
+    }
+
+    public String getInformation() {
+        return information;
     }
 }
