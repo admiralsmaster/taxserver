@@ -14,7 +14,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.1.0.RELEASE</version>
+		<version>2.1.1.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
@@ -37,12 +37,12 @@
 		<dependency>
 			<groupId>info.kuechler.bmf.taxapi</groupId>
 			<artifactId>taxapi</artifactId>
-			<version>2018.1.0</version>
+			<version>2019.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>info.kuechler.bmf.taxcalculator</groupId>
 			<artifactId>taxcalculator</artifactId>
-			<version>2018.0.0</version>
+			<version>2019.0.0</version>
 		</dependency>
 		
 		<dependency>
@@ -51,6 +51,51 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+	
+	<profiles>
+		<profile>
+			<!-- profile for jdk9 -->
+			<id>jdk9</id>
+			<activation>
+				<jdk>9</jdk>
+			</activation>
+			<dependencies>
+				<dependency>
+				    <groupId>javax.xml.bind</groupId>
+				    <artifactId>jaxb-api</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>org.glassfish.jaxb</groupId>
+					<artifactId>jaxb-runtime</artifactId>
+				</dependency>
+				<dependency>
+				    <groupId>javax.annotation</groupId>
+				    <artifactId>javax.annotation-api</artifactId>
+				</dependency>
+			</dependencies>
+		</profile>
+		<profile>
+			<!-- profile for jdk10 -->
+			<id>jdk10</id>
+			<activation>
+				<jdk>10</jdk>
+			</activation>
+			<dependencies>
+				<dependency>
+				    <groupId>javax.xml.bind</groupId>
+				    <artifactId>jaxb-api</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>org.glassfish.jaxb</groupId>
+					<artifactId>jaxb-runtime</artifactId>
+				</dependency>
+				<dependency>
+				    <groupId>javax.annotation</groupId>
+				    <artifactId>javax.annotation-api</artifactId>
+				</dependency>
+			</dependencies>
+		</profile>
+	</profiles>
 
 	<build>
 		<plugins>
